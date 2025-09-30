@@ -3,7 +3,7 @@ function ListNode(val, next) {
   this.next = next === undefined ? null : next;
 }
 
-// 递归法
+// 递归法 26 题
 /* 把 head 结点拿出来，剩下的部分我们调用函数 reverseListRecursion ，这样剩下的部分就逆序了，接着我们把 head 结点放到新链表的尾部就可以了。这就是整个递归的思想了。 */
 
 function reverseList1(head) {
@@ -18,7 +18,7 @@ function reverseList1(head) {
   return reversedList;
 }
 
-// 双指针
+// 双指针 26 题
 /* 两个指针分别指向前一个元素和当前元素，然后修改链表指向，两个指针后移 */
 function reverseList2(head) {
   if (!head || !head.next) {
@@ -38,4 +38,36 @@ function reverseList2(head) {
   }
   return pre;
 }
-export { reverseList1, reverseList2, ListNode };
+
+// 双指针 92 题
+function reverseBetween(head, left, right) {
+  // 处理边界条件
+  if (!head || left === right) return head;
+  
+  const dummy = new ListNode(null, head);
+  let pre = dummy;
+  
+  // 移动到left前一个节点
+  for (let i = 1; i < left; i++) {
+    pre = pre.next;
+  }
+  
+  const reversedEnd = pre.next;
+  let cur = reversedEnd;
+  let prev = null;
+  
+  // 反转left到right部分
+  for (let i = left; i <= right; i++) {
+    const next = cur.next;
+    cur.next = prev;
+    prev = cur;
+    cur = next;
+  }
+  
+  // 连接反转后的链表
+  pre.next = prev;
+  reversedEnd.next = cur;
+  
+  return dummy.next;
+}
+export { reverseList1, reverseList2, reverseBetween, ListNode };

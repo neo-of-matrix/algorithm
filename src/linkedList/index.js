@@ -1,4 +1,4 @@
-import { reverseList1, reverseList2, ListNode } from "./reverseList.js";
+import { reverseList1, reverseList2, reverseBetween, ListNode } from "./reverseList.js";
 
 // 新建链表
 const createLinkedList = (arr) => {
@@ -14,9 +14,9 @@ const createLinkedList = (arr) => {
   return head;
 };
 
-const originLinkedList = createLinkedList([1, 2, 3]);
+const originLinkedList = createLinkedList([1, 2, 3, 4, 5]);
 
 function getReverseList() {
-  return reverseList2(originLinkedList);
+  return reverseBetween(originLinkedList, 2, 4);
 }
 export { originLinkedList, getReverseList };
